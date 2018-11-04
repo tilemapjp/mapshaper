@@ -1,5 +1,6 @@
 /* @requires
 mapshaper-segment-intersection
+mapshaper-path-utils
 */
 
 api.internal = internal;
