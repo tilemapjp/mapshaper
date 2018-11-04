@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+var version = require('./package.json').version;
+var follow = process.argv.indexOf('-f') > -1;
+
+
+require("catty")({follow: follow})
+  .addLibrary("src")
+  .prepend("VERSION = '" + version + "';")
+  .cat("src/mapshaper_maplat.js", onCat);
+
+function onCat(err, js) {
+  if (!err) {
+    write('./www/mapshaper_maplat.js', js);
+  }
+}
+
+function write(ofile, contents) {
+  require('fs').writeFileSync(ofile, contents, 'utf-8');
+  console.log('Wrote', ofile);
+}
